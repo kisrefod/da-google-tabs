@@ -1,0 +1,117 @@
+cabal-version: 3.0
+name:          da-google-tabs
+version:       0.1.0.0
+author:        kisrefod
+maintainer:    kisrefod@gmail.com
+
+common extensions
+  default-extensions:
+    BlockArguments
+    DataKinds
+    DefaultSignatures
+    DeriveAnyClass
+    DerivingStrategies
+    DerivingVia
+    DuplicateRecordFields
+    FunctionalDependencies
+    GADTs
+    ImpredicativeTypes
+    LambdaCase
+    MultiWayIf
+    NoCUSKs
+    NoNamedWildCards
+    NoStarIsType
+    OverloadedLabels
+    OverloadedRecordDot
+    OverloadedStrings
+    PatternSynonyms
+    QuasiQuotes
+    StrictData
+    TypeFamilies
+    UndecidableInstances
+    ViewPatterns
+
+  default-language:   GHC2021
+
+common warnings
+  ghc-options:
+    -Wall -Wno-unticked-promoted-constructors -Wmissing-methods
+    -Wincomplete-patterns -Werror=missing-methods
+    -Werror=incomplete-patterns
+
+common effectful
+  build-depends:
+    , effectful
+    , effectful-core
+    , effectful-plugin
+    , effectful-th
+    , log-effectful
+
+  ghc-options:   -fplugin=Effectful.Plugin
+
+executable da-google-tabs
+  import:
+    , extensions
+    , warnings
+    , effectful
+
+  main-is:        Main.hs
+  ghc-options:    -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+    , base
+    , da-google-tabs
+
+  hs-source-dirs: app
+
+library
+  import:
+    , extensions
+    , warnings
+    , effectful
+
+  hs-source-dirs:  src
+  build-depends:
+    , aeson
+    , aeson-schemas
+    , base
+    , bytestring
+    , deriving-aeson
+    , dhall
+    , effectful
+    , gogol
+    , gogol-core
+    , gogol-sheets
+    , gogol-youtube
+    , hoauth2
+    , http-client-tls
+    , log-base
+    , megaparsec
+    , modern-uri
+    , mtl
+    , PyF
+    , replace-megaparsec
+    , retry
+    , servant
+    , servant-client
+    , servant-client-core
+    , servant-effectful
+    , servant-server
+    , text
+    , time
+    , unliftio
+    , uri-bytestring
+    , vector
+    , warp
+    , websockets
+    , wuss
+
+  -- cabal-fmt: expand src
+  exposed-modules:
+    DA.Auth
+    DA.REST
+    DA.WebSockets
+    DA.WebSockets.Types
+    Donation
+    Env
+    Google
+    Lib
